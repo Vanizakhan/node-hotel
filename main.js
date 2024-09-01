@@ -1,11 +1,25 @@
 import mongoose from "mongoose";
 import express, { Router } from "express";
 // import { Individual } from "./models/person.js";
+// import { personRoutes }from './routes/personRoutes.js'
+import personRoutes from './routes/personRoutes.js'
+// import {} from 'dotenv/config'
+import dotenv from 'dotenv'
+dotenv.config()
 
-let conn = await mongoose.connect("mongodb://localhost:27017/hotel");
+
+
+// let mongoURL="mongodb://localhost:27017/hotel";
+// let conn = await mongoose.connect(mongoURL);
+
+
+// let  mongoUrl= "mongodb+srv://vanizakhan523:Comtrak2025@cluster0.l05sg.mongodb.net/"
+let  mongoUrl= process.env.MONGODB_URL
+let conn = await mongoose.connect(mongoUrl);
+
 
 const app = express();
-const port = 8080;
+// const port = 5500;
 
 import bodyParser from "body-parser";
 app.use(bodyParser.json());
@@ -52,13 +66,11 @@ app.use(bodyParser.json());
 
 // import the router file
 
-import { personRoutes } from './routes/personRoutes.js'
-
-//use the router
 
 app.use('/persons', personRoutes);
 
+const PORT = process.env.PORT || 5500
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });

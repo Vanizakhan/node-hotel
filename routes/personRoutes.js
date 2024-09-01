@@ -1,12 +1,15 @@
 import express from "express";
 import { Router } from "express";
-import { Individual } from "./models/person.js";
+
+const router = Router();
+// import { Individual } from "./models/person.js";
+import { Individual } from "../models/person.js";
 
 
 
 //post route to add a person
 
-Router.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
       const data = req.body;
   
@@ -23,7 +26,7 @@ Router.post("/", async (req, res) => {
 
 
   // post route to get a specified person
-  Router.get("/:workType", async (req, res) => {
+  router.get("/:workType", async (req, res) => {
     try {
       const workType = req.params.workType;
       if (
@@ -44,4 +47,5 @@ Router.post("/", async (req, res) => {
 
 
   // exporting router
-  module.exports = Router;
+  export default router;
+  //  module.exports = Router;
